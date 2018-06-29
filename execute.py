@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 28 23:14:48 2018
-
-@author: lenovo
-"""
-
 import os
 import numpy as np
 from keras.models import load_model
@@ -60,13 +53,14 @@ characters  = ['character_10_yna',
 
 characters.sort()
 
-os.chdir('C://Users//lenovo//Desktop//Docs//Hindi Letters//DevanagariHandwrittenCharacterDataset')
-model = load_model('model.h5')
-
-file_path = 'C://Users//lenovo//Desktop//Docs//Hindi Letters//DevanagariHandwrittenCharacterDataset//4201.png'
-img = cv2.imread(file_path, 0)
+os.chdir('C://Users//lenovo//Desktop//Docs//Hindi Letters//DevanagariHandwrittenCharacterDataset//Weights')
+model = load_model('model3.h5')
+print('Model loaded\n')
+os.chdir('C://Users//lenovo//Desktop//Docs//Hindi Letters//DevanagariHandwrittenCharacterDataset//Examples')
+file_path = input()
+img = cv2.imread('C://Users//lenovo//Desktop//Docs//Hindi Letters//DevanagariHandwrittenCharacterDataset//Examples'+ file_path, 0)
 img = cv2.resize(img, (28, 28))
 img = np.reshape(img, (-1, 28, 28, 1))
 img.shape
-model.summary()
 pred = model.predict(img)
+print(characters[pred.argmax()])
